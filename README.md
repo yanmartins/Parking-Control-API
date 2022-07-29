@@ -1,6 +1,8 @@
-# parking-control-api
+# Parking Control API
  
-> 🚧 README EM CONTRUÇÃO🚧
+Exemplo de API REST usando Spring Boot. O código de base pode ser encontrado em [MichelliBrito/parking-control-api](https://github.com/MichelliBrito/parking-control-api) e o vídeo teórico no canal do YouTube da [Michelli Brito](https://www.youtube.com/watch?v=LXRU-Z36GEU).
+
+> 🚧 Novos recursos estão sendo adicionados para fins de estudo.
 
 # Tecnologias
 
@@ -24,7 +26,15 @@ spring.jpa.hibernate.ddl-auto=update
 spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
 ```
 
-|Método|Endpoint|Descrição|Exemplo|
+# Recursos
+
+|Método|Endpoint|Descrição|
+|-|-|-|
+| POST | `/parking-spot` | Cadastra uma nova vaga. [Exemplo](#post---cadastrar-nova-vaga)|
+|GET| `/parking-spot` | Lista todas as vagas cadastradas. [Exemplo](#get---listar-todas-as-vagas)
+|GET|`/parking-spot/{id}` | Consulta uma vaga cadastrada. [Exemplo](#get---consultar-uma-vaga)
+|DELETE|`/parking-spot/{id}` | Deleta uma vaga cadastrada. [Exemplo](#delete---deletar-uma-vaga)
+|PUT|`/parking-spot/{id}` | Altera dados de uma vaga cadastrada. [Exemplo](#put---atualizar-dados-de-uma-vaga)
 
 # Testando endpoints da API
 
@@ -33,14 +43,21 @@ Para testar os métodos, eu utilizei a extensão [Thunder Client](https://market
 ## POST - Cadastrar nova vaga
 
 Realiza o cadastro de uma nova vaga.
-```
-http://localhost:8080/parking-spot
-```
+
 ### Request
 
 <table>
 <tr>
 <td> Campo </td> <td> Conteúdo </td>
+</tr>
+<tr>
+<td>URL</td>
+<td>
+
+```
+http://localhost:8080/parking-spot
+```
+</td>
 </tr>
 <tr>
 <td> Body </td>
@@ -92,10 +109,36 @@ http://localhost:8080/parking-spot
 
 ## GET - Listar todas as vagas
 
+Realiza a listagem de todas as vagas cadastradas.
+
+### Request
+
+<table>
+<tr>
+<td> Campo </td> <td> Conteúdo </td>
+</tr>
+<tr>
+<td>URL</td>
+<td>
+
+```
 http://localhost:8080/parking-spot
+```
+</td>
+</tr>
+
+</table>
 
 ### Response 
 
+<table>
+<tr>
+<td> Status </td> <td> Conteúdo </td>
+</tr>
+<tr>
+<td> 200 </td>
+<td>
+    
 ```json
 {
   "content": [
@@ -151,15 +194,41 @@ http://localhost:8080/parking-spot
   "empty": false
 }
 ```
+</td>
+</tr>
+</table>
 
-## GET - Listar uma vaga
+## GET - Consultar uma vaga
 
-http://localhost:8080/parking-spot/{id}
+Realiza a consulta de dados de uma vaga específica.
 
+### Request
+
+<table>
+<tr>
+<td> Campo </td> <td> Conteúdo </td>
+</tr>
+<tr>
+<td> URL </td>
+<td>
+    
+```
 http://localhost:8080/parking-spot/66eb77dd-21a5-4d4f-ad19-546254d5b336
+```
+</td>
+</tr>
+</table>
 
 ### Response
 
+<table>
+<tr>
+<td> Status </td> <td> Conteúdo </td>
+</tr>
+<tr>
+<td> 200 </td>
+<td>
+    
 ```json
 {
   "id": "66eb77dd-21a5-4d4f-ad19-546254d5b336",
@@ -174,25 +243,74 @@ http://localhost:8080/parking-spot/66eb77dd-21a5-4d4f-ad19-546254d5b336
   "block": "B"
 }
 ```
+</td>
+</tr>
+</table>
 
-## DELETE - Deleta uma vaga por id
 
-http://localhost:8080/parking-spot/{id}
+## DELETE - Deletar uma vaga
 
+Deleta uma caga específica.
+
+### Request
+
+<table>
+<tr>
+<td> Campo </td> <td> Conteúdo </td>
+</tr>
+<tr>
+<td> URL </td>
+<td>
+    
+```
 http://localhost:8080/parking-spot/66eb77dd-21a5-4d4f-ad19-546254d5b336
+```
+</td>
+</tr>
+</table>
 
 ### Response
 
+
+
+<table>
+<tr>
+<td> Status </td> <td> Conteúdo </td>
+</tr>
+<tr>
+<td> 200 </td>
+<td>
+    
 ```
 Parking Spot deleted successfully.
 ```
+</td>
+</tr>
+</table>
 
 ## PUT - Atualizar dados de uma vaga
 
-http://localhost:8080/parking-spot/{id}
+Atualiza os dados de uma vaga específica.
 
+### Request
+
+<table>
+<tr>
+<td> Campo </td> <td> Conteúdo </td>
+</tr>
+<tr>
+<td>URL</td>
+<td>
+
+```
 http://localhost:8080/parking-spot/aad8bc8c-6a32-4d78-a8aa-541211124d42
-
+```
+</td>
+</tr>
+<tr>
+<td> Body </td>
+<td>
+    
 ```json
 {
     "parkingSpotNumber":"111B",
@@ -205,8 +323,20 @@ http://localhost:8080/parking-spot/aad8bc8c-6a32-4d78-a8aa-541211124d42
     "block":"A"
 }
 ```
+</td>
+</tr>
+</table>
+
 ### Response
 
+<table>
+<tr>
+<td> Status </td> <td> Conteúdo </td>
+</tr>
+<tr>
+<td> 200 </td>
+<td>
+    
 ```json
 {
   "id": "aad8bc8c-6a32-4d78-a8aa-541211124d42",
@@ -221,9 +351,6 @@ http://localhost:8080/parking-spot/aad8bc8c-6a32-4d78-a8aa-541211124d42
   "block": "A"
 }
 ```
-
-# Fontes
-
-- [MichelliBrito
-/
-parking-control-api](https://github.com/MichelliBrito/parking-control-api)
+</td>
+</tr>
+</table>
